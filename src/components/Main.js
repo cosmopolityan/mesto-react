@@ -1,33 +1,56 @@
 import React from 'react';
+import { api } from '../utils/api';
+import Card from './Card';
 
-function handleEditAvatarClick(e) {
-  e.preventDefault();
-  console.log('Отправлена форма.');
-  const test = document.querySelectorAll('#confirm-edit-profile-avatar_popup');
-  test.classList.add('.popup__opened');
-}
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
+  const [userName, setUserName] = React.useState('')
+  const [userDescription, setUserDescription] = React.useState('')
+  const [userAvatar, setUserAvatar] = React.useState('')
+  const [cards, setCards] = React.useState([])
 
-function Main() {
+  React.useEffect(() => {
+
+    api.getInitialData()
+      .then((arg) => {
+        const [userData, initialCards] = arg;
+        setUserName(userData.name);
+        setUserDescription(userData.about);
+        setUserAvatar(userData.avatar)
+        setCards(initialCards);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [])
+
   return (
-    <main class="content">
-      <section class="profile">
-        <div class="profile__avatar-block">
-          <img class="profile__avatar" src="#" alt="Ваш аватар" />
-          <div class="profile__background" onClick={handleEditAvatarClick}></div>
+    <main className="content">
+      <section className="profile">
+        <div className="profile__avatar-block">
+          <img className="profile__avatar" src={userAvatar} alt={userName} />
+          <div className="profile__background" onClick={onEditAvatar}></div>
         </div>
-        <div class="profile__info">
-          <div class="profile__container">
-            <h1 class="profile__name"></h1>
-            <button type="button" class="profile__edit-button" aria-label="Редактировать профиль"></button>
+        <div className="profile__info">
+          <div className="profile__container">
+            <h1 className="profile__name">{userName}</h1>
+            <button type="button" className="profile__edit-button" onClick={onEditProfile} aria-label="Редактировать профиль"></button>
           </div>
-          <p class="profile__description"></p>
+          <p className="profile__description">{userDescription}</p>
         </div>
-        <button type="button" class="profile__add-button" aria-label="Добавить новую карточку"></button>
+        <button type="button" className="profile__add-button" onClick={onAddPlace} aria-label="Добавить новую карточку"></button>
       </section>
 
-      <section class="elements">
-        <ul class="elements__list">
+      {/* Карточки грузятся ок */}
 
+      <section className="elements">
+        <ul className="elements__list">
+          {cards.map((item) => (
+            <Card
+              key={item._id}
+              card={item}
+              onCardClick={onCardClick}
+            />
+          ))}
         </ul>
       </section>
 
