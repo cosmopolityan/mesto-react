@@ -2,10 +2,10 @@
 
 ## Описание проекта
 
-Mesto - учебный проект, выполняемый на протяжении 10 спринта курса ["Веб-разработчик" от Яндекс.Практикум](https://practicum.yandex.ru/web).
+Mesto — учебный проект, выполняемый на протяжении 10 спринта курса ["Веб-разработчик" от Яндекс.Практикум](https://practicum.yandex.ru/web).
 
 ## Цель
-Переписать существующий проект [Mesto](https://github.com/cosmopolityan/mesto) нап Реакте.
+Переписать существующий проект [Mesto](https://github.com/cosmopolityan/mesto) на Реакте.
 
 Чек-лист: https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-10.pdf
 
