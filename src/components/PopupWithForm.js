@@ -1,4 +1,5 @@
 function PopupWithForm(props) {
+  const { onSubmit } = props;
   return (
     <section className={'popup' + (props.isOpen ? ' popup_opened' : '')} id={props.name}>
       <div className="popup__container">
@@ -6,7 +7,7 @@ function PopupWithForm(props) {
         <button onClick={props.onClose} type="reset" className="popup__close-button" />
         <h2 className="popup__title">{props.title}</h2>
 
-        <form className="popup__form" action="#">
+        <form className="popup__form" action="#" onSubmit={onSubmit}>
 
           {props.children}
 

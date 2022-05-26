@@ -1,5 +1,4 @@
 import React from 'react';
-import { api } from '../utils/api';
 import Card from './Card';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
@@ -12,6 +11,7 @@ function Main(props) {
       <section className="profile">
         <div className="profile__avatar-block">
           <img className="profile__avatar" src={currentUser.avatar} alt={currentUser.name} />
+          {/* Uncaught TypeError: Cannot read properties of undefined (reading 'avatar') */}
           <div className="profile__background" onClick={onEditAvatar}></div>
         </div>
         <div className="profile__info">
@@ -24,7 +24,7 @@ function Main(props) {
         <button type="button" className="profile__add-button" onClick={onAddPlace} aria-label="Добавить новую карточку"></button>
       </section>
 
-      {/* Карточки не грузятся */}
+      {/* Карточки грузятся */}
 
       <section className="elements">
         <ul className="elements__list">

@@ -52,7 +52,7 @@ export default class Api {
       .then(this._checkResponse)
   }
 
-  editProfileInfo(newInfo) {
+  setUserInfo(newInfo) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -64,7 +64,7 @@ export default class Api {
       .then(this._checkResponse)
   }
 
-  editAvatar(newAvatar) {
+  setUserAvatar(newAvatar) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
@@ -92,12 +92,24 @@ export default class Api {
   }
 }
 
+// 39
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort36',
+  // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort39',
+  // это верный адрес:
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',
   headers: {
-    authorization: 'c848aad0-462d-42a9-8fc3-c67e20450e85',
+    authorization: '8a68b5b5-74ef-4efd-83eb-2f78a5762b34',
     'Content-Type': 'application/json'
   }
 });
 
-export {api}
+// 36
+// const api = new Api({
+//   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort36',
+//   headers: {
+//     authorization: 'c848aad0-462d-42a9-8fc3-c67e20450e85',
+//     'Content-Type': 'application/json'
+//   }
+// });
+
+export { api }
