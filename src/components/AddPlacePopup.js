@@ -45,7 +45,7 @@ export default function AddPlacePopup(props) {
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    onAddPlace({ name: placeName, link });
+    onAddPlace({ name: placeName, link }); // error_2905
   }
 
   const { placeName, link } = formValues;
@@ -54,32 +54,34 @@ export default function AddPlacePopup(props) {
 
   return (
 
-    
-    <PopupWithForm 
-    title={"Новое место"} 
-    name={"add-card_form"} 
-    buttonTitle={"Создать"}
-    isOpen={isOpen}
-    onClose={onClose}
-    onSubmit={handleSubmit}>
+    <PopupWithForm
+      title={"Новое место"}
+      name={"add-card_form"}
+      buttonTitle={"Создать"}
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+      valid={isSubmitAble}>
 
-    <input 
-    onChange={handleInputChange}
-    type="text" 
-    className="popup__input" 
-    name="title" 
-    id="title" 
-    placeholder="Название" minLength="2" maxLength="30" required />
+      <input
+        value={placeName}
+        onChange={handleInputChange}
+        type="text"
+        className="popup__input"
+        name="placeName"
+        id="title"
+        placeholder="Название" minLength="2" maxLength="30" required />
 
-    <input 
-    onChange={handleInputChange}
-    type="url" 
-    className="popup__input" 
-    name="link" 
-    id="photo-link" 
-    placeholder="Ссылка на картинку" 
-    required />
+      <input
+        value={link}
+        onChange={handleInputChange}
+        type="url"
+        className="popup__input"
+        name="link"
+        id="photo-link"
+        placeholder="Ссылка на картинку"
+        required />
 
-  </PopupWithForm>
+    </PopupWithForm>
   )
 }

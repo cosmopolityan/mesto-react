@@ -1,73 +1,116 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import PopupWithForm from './PopupWithForm';
 
-function EditProfilePopup({ isOpen, onClose, onUpdateUser, loading, isValid, errorMessage }) {
-  const [name, setName] = useState(''); 
-  const [description, setDescription] = useState('');
+export default function EditProfilePopup(props) {
+  const { onUpdateUser, isOpen, onClose } = props;
+
   const currentUser = React.useContext(CurrentUserContext);
 
-  function handleInputChange(e) {
-    setName(e.target.value);
-  }
-  function handleInputDescription(e) {
-    setDescription(e.target.value);
-  }
+  const [formValues, setFormValues] = React.useState({
+    name: '',
+    description: ''
+  });
 
-  useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
-  }, [currentUser, isOpen]);
+  const [formValidity, setFormValidity] = React.useState({
+    nameValid: true,
+    descValid: true
+  });
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  // function handleInputChange(e) {
+  //   setName(e.target.value);
+  // }
+  // function handleInputDescription(e) {
+  //   setAbout(e.target.value);
+  // }
 
-    onUpdateUser({
-      name,
-      about: description
+  React.useEffect(() => {
+    setFormValues({
+      name: currentUser.name,
+      description: currentUser.about
     })
+  }, [currentUser, isOpen])
+
+  React.useEffect(() => {
+    const isNameValid = formValues.name.length > 1;
+    const isDescriptionValid = formValues.description.length > 1;
+
+    setFormValidity({
+      nameValid: isNameValid,
+      descValid: isDescriptionValid
+    })
+  }, [formValues])
+
+
+  const handleInputChange = React.useCallback((evt) => {
+    const { name, value } = evt.target
+
+    setFormValues((prevState) => ({
+      ...prevState, [name]: value
+    }));
+  }, [formValues]);
+
+
+  // const handleInputDescription = React.useCallback((evt) => {
+  //   const { description, value } = evt.target
+
+  //   setFormValues((prevState) => ({
+  //     ...prevState, [description]: value
+  //   }));
+  // }, [formValues]);
+
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+
+    onUpdateUser({ name: name, about: description })
   }
+
+  const { name, description } = formValues;
+  const { nameValid, descValid } = formValidity;
+  const isSubmitAble = nameValid && descValid;
 
   return (
 
-    <PopupWithForm 
-    title={"Редактировать профиль"} 
-    name={"edit-profile_form"}
-    isOpen={isOpen}
-    onClose={onClose}
-    onSubmit={handleSubmit}>
+    <PopupWithForm
+      title={"Редактировать профиль"}
+      name={"edit-profile_form"}
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+      valid={isSubmitAble}>
 
-    <input 
-    value={name}
-    onChange={handleInputChange}
-    type="text" 
-    autoComplete="name" 
-    autoCapitalize="words" 
-    className="popup__input" 
-    name="name" 
-    id="profile-name" 
-    placeholder="Имя"
-    minLength="2" 
-    maxLength="40" 
-    required
-    // className={`"popup__error popup__error_type_name" id="profile-name-error"}`}
-    />
+      <input
+        value={name}
+        onChange={handleInputChange}
+        type="text"
+        autoComplete="name"
+        autoCapitalize="words"
+        // className="popup__input"
+        className={`popup__input popup__input_type_name ${nameValid ? '' : 'popup__input_error'}`}
+        name="name"
+        id="profile-name"
+        placeholder="Имя"
+        minLength="2"
+        maxLength="40"
+        required
+      />
 
-    <input
-    value={description}
-    onChange={handleInputDescription} 
-    type="text" 
-    className="popup__input" 
-    name="job" 
-    id="job" 
-    placeholder="О себе" 
-    minLength="2" 
-    maxLength="200" 
-    required
-    // className={`"popup__error popup__error_type_job" id="profile-job-error"}`}
-    />
-  </PopupWithForm>
+      <input
+        value={description}
+        onChange={handleInputChange}
+        type="text"
+        autoComplete="description"
+        autoCapitalize="words"
+        //className="popup__input" 
+        className={`popup__input popup__input_type_job ${descValid ? '' : 'popup__input_error'}`}
+        name="description"
+        id="description"
+        placeholder="О себе"
+        minLength="2"
+        maxLength="200"
+        required
+      />
+    </PopupWithForm>
   )
 }
-
-export default EditProfilePopup;

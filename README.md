@@ -7,5 +7,9 @@ Mesto — учебный проект, выполняемый на протяж�
 ## Цель
 Переписать существующий проект [Mesto](https://github.com/cosmopolityan/mesto) на Реакте.
 
-Чек-лист: https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-10.pdf
+Чек-листы: 
+1. https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-10.pdf
+2. https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-11.pdf
 
+## Сборка
+`npm run start`

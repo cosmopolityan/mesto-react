@@ -1,5 +1,5 @@
 function PopupWithForm(props) {
-  const { onSubmit } = props;
+  const { title, name, buttonText, children, isOpen, onClose, stopProp, onSubmit, valid } = props;
   return (
     <section className={'popup' + (props.isOpen ? ' popup_opened' : '')} id={props.name}>
       <div className="popup__container">

@@ -152,7 +152,7 @@ function App() {
 
   function handleAddPlaceSubmit(newCard) {
     setPlaceButtonText('Сохранение...')
-    api.postItem(newCard)
+    api.postItem(newCard) // error_2905
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups()
@@ -174,9 +174,10 @@ function App() {
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
             onEditAvatar={handleEditAvatarClick}
-            onCardClick={handleCardClick}
             cards={cards}
+            onCardClick={handleCardClick}
             onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
           />
 
           <Footer />

@@ -33,7 +33,7 @@ export default class Api {
   }
 
   postItem(newItem) {
-    return fetch(`${this._url}/cards`, {
+    return fetch(`${this._url}/cards`, { // error_2905
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
