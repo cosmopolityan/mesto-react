@@ -3,9 +3,9 @@ import logo from '../images/logo.svg';
 
 function Header() {
   return (
-    <header class="header">
-      <a href="#" class="header__link">
-        <img src={logo} alt="Надпись: Место. Россия" class="header__logo" />
+    <header className="header">
+      <a href="#" className="header__link">
+        <img src={logo} alt="Надпись: Место. Россия" className="header__logo" />
       </a>
     </header>
   );
